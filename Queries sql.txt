@@ -1,0 +1,30 @@
+A: All boats that have been reserved at least once.
+
+SELECT cni, name
+ FROM Boat JOIN Reservation
+ON cni.Boat = cni.Reservation
+
+
+B: All sailors that have reserved boats registered in the country 'Portugal'.
+
+SELECT name
+FROM Person JOIN Reservation
+ON Person.id_card = Reservation.id_card
+WHERE Country.name = 'Portugal'
+
+
+C: All reservations longer than 5 days.
+
+SELECT start_date, end_date, cni,iso_code
+FROM Reservation
+WHERE end_date - start_date > 5 days
+
+
+D: Name and CNI of all boats registered in 'South Africa' whose owner name ends with 'Rendeiro'. 
+
+SELECT name,cni
+FROM Boat JOIN Country
+ON Boat.iso_code = Country.iso_code
+JOIN Person
+ON Boat.owner_id_card = Person.id_card
+WHERE Country.name = 'South Africa' AND Person.name = %Rendeiro'
